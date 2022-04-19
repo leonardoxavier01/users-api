@@ -23,17 +23,17 @@ const userRoute = (app) => {
     .get((req, res) => {
       const users = getUsers();
 
-       res.send({ users });
+      res.send({ users });
     });
-    .post((req, res) => {
-      const users = getUsers();
-      
-       users.push(req.body)
-       saveUser(users)
+  app.route("/users")
+    .post((req, res)=> {
+      const users = getUsers(); 
 
-       res.send(201).send('OK')
-    });
-    
+      users.push(req.body)
+      saveUser(users)
+
+      res.status(201).send('OK')
+  });
 };
 
 
