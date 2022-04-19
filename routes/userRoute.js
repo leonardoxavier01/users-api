@@ -35,7 +35,7 @@ const userRoute = (app) => {
 
       res.status(201).send('OK')
   });
-  
+
   app.route("/users/:id?")
   .put((req, res)=>{
     const users = getUsers()
@@ -53,6 +53,14 @@ const userRoute = (app) => {
     res.status(201).send('OK')
   })
 
+  app.route("/users/:id?")
+  .delete((req, res) =>{
+    const users = getUsers()
+
+    saveUser(users.filter(user => user.id != req.params.id))
+
+    res.status(200).send('OK')
+  })
 };
 
 
