@@ -25,6 +25,7 @@ const userRoute = (app) => {
 
       res.send({ users });
     });
+
   app.route("/users")
     .post((req, res)=> {
       const users = getUsers(); 
@@ -34,6 +35,24 @@ const userRoute = (app) => {
 
       res.status(201).send('OK')
   });
+  
+  app.route("/users/:id?")
+  .put((req, res)=>{
+    const users = getUsers()
+
+    saveUser(users.map(user =>{
+      if (user.id === req.params.id){
+        return{
+          ...user,
+          ...req.body
+        }
+      }
+      return user
+    }))
+
+    res.status(201).send('OK')
+  })
+
 };
 
 
